@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "userName": "Ali Raza",
+    "content": "Just had a great walk in the park!",
+    "imageUrl": "https://picsum.photos/200/300?random=1",
+    "timestamp": "2025-06-16T10:00:00Z"
+  },
+  {
+    "id": "2",
+    "userName": "Sara Khan",
+    "content": "Enjoying a cup of chai and reading a book. Life is good!",
+    "imageUrl": "",
+    "timestamp": "2025-06-16T09:45:00Z"
+  },
+  {
+    "id": "3",
+    "userName": "Hamza Malik",
+    "content": "Check out this amazing sunset!",
+    "imageUrl": "https://picsum.photos/200/300?random=2",
+    "timestamp": "2025-06-15T18:30:00Z"
+  }
+]
