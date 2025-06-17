@@ -1,26 +1,55 @@
 [
   {
-    "id": "1",
-    "userName": "Ali Raza",
-    "bio": "Nature lover. Early riser. Walker of peaceful paths.",
+    "id": "p1",
+    "userId": "u1",
     "content": "Just had a great walk in the park!",
     "imageUrl": "https://picsum.photos/200/300?random=1",
-    "timestamp": "2025-06-16T10:00:00Z"
+    "timestamp": "2025-06-16T10:00:00Z",
+    "likes": 12,
+    "unlikes": 1,
+    "comments": [
+      {
+        "id": "c1",
+        "userId": "u2",
+        "text": "Sounds refreshing!"
+      }
+    ]
   },
   {
-    "id": "2",
-    "userName": "Sara Khan",
-    "bio": "Bookworm ☕ | Chai addict | Dreaming in stories.",
+    "id": "p2",
+    "userId": "u2",
     "content": "Enjoying a cup of chai and reading a book. Life is good!",
     "imageUrl": "",
-    "timestamp": "2025-06-16T09:45:00Z"
+    "timestamp": "2025-06-16T09:45:00Z",
+    "likes": 25,
+    "unlikes": 0,
+    "comments": [
+      {
+        "id": "c2",
+        "userId": "u3",
+        "text": "Nothing better than that!"
+      }
+    ]
   },
   {
-    "id": "3",
-    "userName": "Hamza Malik",
-    "bio": "Photographer 🌅 | Sunset chaser | Life through a lens.",
+    "id": "p3",
+    "userId": "u3",
     "content": "Check out this amazing sunset!",
     "imageUrl": "https://picsum.photos/200/300?random=2",
-    "timestamp": "2025-06-15T18:30:00Z"
+    "timestamp": "2025-06-15T18:30:00Z",
+    "likes": 30,
+    "unlikes": 2,
+    "comments": [
+      {
+        "id": "c3",
+        "userId": "u1",
+        "text": "Stunning view!"
+      },
+      {
+        "id": "c4",
+        "userId": "u2",
+        "text": "So peaceful!"
+      }
+    ]
   }
 ]
