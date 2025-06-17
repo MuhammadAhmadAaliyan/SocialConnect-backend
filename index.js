@@ -20,7 +20,6 @@ app.get('/posts', (req, res) => {
   const posts = getData(POSTS_FILE);
   const users = getData(USERS_FILE);
 
-  // Join user data to each post and comment
   const enrichedPosts = posts.map(post => {
     const user = users.find(u => u.id === post.userId) || {};
     const comments = (post.comments || []).map(comment => ({
@@ -31,7 +30,9 @@ app.get('/posts', (req, res) => {
     return {
       ...post,
       user,
-      comments
+      comments,
+      likes: post.likedBy?.length || 0,
+      unlikes: post.unlikedBy?.length || 0,
     };
   });
 
@@ -49,8 +50,8 @@ app.post('/posts', (req, res) => {
     content,
     imageUrl,
     timestamp: new Date().toISOString(),
-    likes: 0,
-    unlikes: 0,
+    likedBy: [],
+    unlikedBy: [],
     comments: []
   };
 
@@ -74,39 +75,69 @@ app.post('/posts/:id/comments', (req, res) => {
     text
   };
 
-  post.comments = post.comments || [];
   post.comments.push(newComment);
-
   saveData(POSTS_FILE, posts);
   res.status(201).json(newComment);
 });
 
-// Like a post
+// Toggle like
 app.post('/posts/:id/like', (req, res) => {
   const { id } = req.params;
+  const { userId } = req.body;
   const posts = getData(POSTS_FILE);
 
   const post = posts.find(p => p.id === id);
   if (!post) return res.status(404).json({ message: 'Post not found' });
 
-  post.likes = (post.likes || 0) + 1;
-  saveData(POSTS_FILE, posts);
+  post.likedBy = post.likedBy || [];
+  post.unlikedBy = post.unlikedBy || [];
 
-  res.json({ message: 'Liked', likes: post.likes });
+  const likedIndex = post.likedBy.indexOf(userId);
+  const unlikedIndex = post.unlikedBy.indexOf(userId);
+
+  if (likedIndex === -1) {
+    post.likedBy.push(userId);
+    if (unlikedIndex !== -1) post.unlikedBy.splice(unlikedIndex, 1);
+  } else {
+    post.likedBy.splice(likedIndex, 1); // Toggle off
+  }
+
+  saveData(POSTS_FILE, posts);
+  res.json({
+    message: 'Toggled like',
+    likes: post.likedBy.length,
+    unlikes: post.unlikedBy.length,
+  });
 });
 
-// Unlike a post
+// Toggle unlike
 app.post('/posts/:id/unlike', (req, res) => {
   const { id } = req.params;
+  const { userId } = req.body;
   const posts = getData(POSTS_FILE);
 
   const post = posts.find(p => p.id === id);
   if (!post) return res.status(404).json({ message: 'Post not found' });
 
-  post.unlikes = (post.unlikes || 0) + 1;
-  saveData(POSTS_FILE, posts);
+  post.unlikedBy = post.unlikedBy || [];
+  post.likedBy = post.likedBy || [];
 
-  res.json({ message: 'Unliked', unlikes: post.unlikes });
+  const unlikedIndex = post.unlikedBy.indexOf(userId);
+  const likedIndex = post.likedBy.indexOf(userId);
+
+  if (unlikedIndex === -1) {
+    post.unlikedBy.push(userId);
+    if (likedIndex !== -1) post.likedBy.splice(likedIndex, 1);
+  } else {
+    post.unlikedBy.splice(unlikedIndex, 1); // Toggle off
+  }
+
+  saveData(POSTS_FILE, posts);
+  res.json({
+    message: 'Toggled unlike',
+    likes: post.likedBy.length,
+    unlikes: post.unlikedBy.length,
+  });
 });
 
 app.listen(PORT, () => {

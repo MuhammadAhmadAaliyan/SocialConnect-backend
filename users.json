@@ -1,0 +1,20 @@
+[
+  {
+    "id": "u1",
+    "name": "Ali Raza",
+    "bio": "Nature lover and morning walker.",
+    "avatar": "https://i.pravatar.cc/150?img=1"
+  },
+  {
+    "id": "u2",
+    "name": "Sara Khan",
+    "bio": "Tea enthusiast and bookworm.",
+    "avatar": "https://i.pravatar.cc/150?img=2"
+  },
+  {
+    "id": "u3",
+    "name": "Hamza Malik",
+    "bio": "Photographer and sunset chaser.",
+    "avatar": "https://i.pravatar.cc/150?img=3"
+  }
+]
