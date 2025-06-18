@@ -15,7 +15,70 @@ const USERS_FILE = './users.json';
 const getData = (file) => fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : [];
 const saveData = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-// GET all posts (with user info and comments)
+// === USERS ===
+
+// Create a new user
+app.post('/users', (req, res) => {
+  const { name, email } = req.body;
+  const users = getData(USERS_FILE);
+
+  const newUser = {
+    id: Date.now().toString(),
+    name,
+    email,
+    avatar: '',
+    bio: ''
+  };
+
+  users.push(newUser);
+  saveData(USERS_FILE, users);
+  res.status(201).json(newUser);
+});
+
+// Get all users
+app.get('/users', (req, res) => {
+  const users = getData(USERS_FILE);
+  res.json(users);
+});
+
+// Get a specific user by ID
+app.get('/users/:id', (req, res) => {
+  const users = getData(USERS_FILE);
+  const user = users.find(u => u.id === req.params.id);
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  res.json(user);
+});
+
+// Update user profile (name, bio, avatar)
+app.patch('/users/:id', (req, res) => {
+  const users = getData(USERS_FILE);
+  const index = users.findIndex(u => u.id === req.params.id);
+  if (index === -1) return res.status(404).json({ message: 'User not found' });
+
+  const user = users[index];
+  const { name, bio, avatar } = req.body;
+
+  users[index] = {
+    ...user,
+    name: name ?? user.name,
+    bio: bio ?? user.bio,
+    avatar: avatar ?? user.avatar,
+  };
+
+  saveData(USERS_FILE, users);
+  res.json(users[index]);
+});
+
+// Get posts liked by a specific user
+app.get('/users/:id/liked-posts', (req, res) => {
+  const posts = getData(POSTS_FILE);
+  const likedPosts = posts.filter(p => p.likedBy?.includes(req.params.id));
+  res.json(likedPosts);
+});
+
+// === POSTS ===
+
+// Get all posts with user and comments enriched
 app.get('/posts', (req, res) => {
   const posts = getData(POSTS_FILE);
   const users = getData(USERS_FILE);
@@ -39,7 +102,7 @@ app.get('/posts', (req, res) => {
   res.json(enrichedPosts);
 });
 
-// POST a new post
+// Create a new post
 app.post('/posts', (req, res) => {
   const { userId, content, imageUrl } = req.body;
   const posts = getData(POSTS_FILE);
@@ -60,7 +123,7 @@ app.post('/posts', (req, res) => {
   res.status(201).json(newPost);
 });
 
-// POST a comment to a post
+// Add a comment to a post
 app.post('/posts/:id/comments', (req, res) => {
   const { id } = req.params;
   const { userId, text } = req.body;
@@ -99,7 +162,7 @@ app.post('/posts/:id/like', (req, res) => {
     post.likedBy.push(userId);
     if (unlikedIndex !== -1) post.unlikedBy.splice(unlikedIndex, 1);
   } else {
-    post.likedBy.splice(likedIndex, 1); // Toggle off
+    post.likedBy.splice(likedIndex, 1);
   }
 
   saveData(POSTS_FILE, posts);
@@ -129,7 +192,7 @@ app.post('/posts/:id/unlike', (req, res) => {
     post.unlikedBy.push(userId);
     if (likedIndex !== -1) post.likedBy.splice(likedIndex, 1);
   } else {
-    post.unlikedBy.splice(unlikedIndex, 1); // Toggle off
+    post.unlikedBy.splice(unlikedIndex, 1);
   }
 
   saveData(POSTS_FILE, posts);
@@ -141,5 +204,5 @@ app.post('/posts/:id/unlike', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running at: http://localhost:${PORT}`);
 });
