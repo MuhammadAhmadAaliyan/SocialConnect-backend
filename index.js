@@ -23,7 +23,7 @@ app.post('/users', (req, res) => {
   const users = getData(USERS_FILE);
 
   const newUser = {
-    id: Date.now().toString(),
+    id,
     name,
     email,
     avatar: '',
