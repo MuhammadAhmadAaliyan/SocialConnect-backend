@@ -19,7 +19,7 @@ const saveData = (file, data) => fs.writeFileSync(file, JSON.stringify(data, nul
 
 // Create a new user
 app.post('/users', (req, res) => {
-  const { name, email } = req.body;
+  const { id, name, email, avatar, bio } = req.body;
   const users = getData(USERS_FILE);
 
   const newUser = {
