@@ -19,7 +19,7 @@ const saveUsers = (users) => {
 
 // ✅ Signup
 app.post('/signup', (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, id } = req.body;
   const users = loadUsers();
 
   if (users.find(user => user.email === email)) {
@@ -27,7 +27,7 @@ app.post('/signup', (req, res) => {
   }
 
   const newUser = {
-    id: String(Date.now()),
+    id,
     name,
     email,
     password,
