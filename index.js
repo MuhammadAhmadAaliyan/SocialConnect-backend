@@ -14,7 +14,7 @@ const loadUsers = () => {
 };
 
 const saveUsers = (users) => {
-  fs.writeFileSync('db.json', JSON.stringify(users, null, 2));
+  fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
 };
 
 // ✅ Signup
