@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Load users from JSON file
 const loadUsers = () => {
-  const data = fs.readFileSync('db.json');
+  const data = fs.readFileSync('users.json');
   return JSON.parse(data);
 };
 
