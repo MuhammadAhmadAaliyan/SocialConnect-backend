@@ -152,7 +152,7 @@ app.post("/create-post", (req, res) => {
 });
 
 // Get all posts
-app.get("/api/posts", (req, res) => {
+app.get("/posts", (req, res) => {
   const posts = loadPosts();
   res.json(posts);
 });
