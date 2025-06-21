@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": "u1",
+    "name": "Ali Raza",
+    "email": "aliraza@example.com",
+    "password": "alpha123",
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "bio": "Aspiring app developer. Coffee addict ☕ and code enthusiast 💻."
+  },
+  {
+    "id": "u2",
+    "name": "Fatima Noor",
+    "email": "fatima@example.com",
+    "password": "fatima246",
+    "avatar": "https://i.pravatar.cc/150?img=5",
+   "bio": "Lover of nature 🌿, photography 📸, and building cool UIs with React Native!"
+  },
+  {
+    "id": "u3",
+    "name": "Usman Khan",
+    "email": "usman@example.com",
+    "password": "usman789",
+    "avatar": "https://i.pravatar.cc/150?img=8",
+    "bio": ""
+  },
+  {
+  "id": "u4",
+  "name": "Sara Malik",
+  "email": "sara@example.com",
+  "password": "sara1155",
+  "avatar": "https://i.pravatar.cc/150?img=12",
+  "bio": "UI/UX designer by day, Netflix binger by night 🎨🍿."
+}
+
+]
