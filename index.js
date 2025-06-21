@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
+const { v4: uuidv4 } = require("uuid");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -13,8 +14,21 @@ const loadUsers = () => {
   return JSON.parse(data);
 };
 
+//Load posts from JSON file
+const loadPosts = () => {
+  if (!fs.existsSync("posts.json")) return [];
+  const data = fs.readFileSync("posts.json", "utf-8");
+  return JSON.parse(data);
+};
+
+//Save users to JSON file
 const saveUsers = (users) => {
   fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
+};
+
+// Save posts to JSON file
+const savePosts = (posts) => {
+  fs.writeFileSync("posts.json", JSON.stringify(posts, null, 2));
 };
 
 // ✅ Signup
@@ -41,7 +55,7 @@ app.post('/signup', (req, res) => {
   res.status(201).json({ message: 'Signup successful', user: newUser });
 });
 
-// ✅ Login
+// Login
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   const users = loadUsers();
@@ -100,7 +114,7 @@ app.patch('/user/:id',(req, res) => {
   return res.status(200).json({message: "Changes update Successfully"});
 });
 
-// ✅ Get All Users (Optional for testing)
+// Get All Users (Optional for testing)
 app.get('/users', (req, res) => {
   const users = loadUsers();
   res.json(users);
@@ -108,4 +122,37 @@ app.get('/users', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+//Create New Post
+app.post("/create-post", (req, res) => {
+  const { userId, text, image = "" } = req.body;
+
+  if (!userId || !text) {
+    return res.status(400).json({ message: "userId and text are required" });
+  }
+
+  const posts = loadPosts();
+
+  const newPost = {
+    id: uuidv4(),
+    userId,
+    text,
+    image,
+    timestamp: new Date().toISOString(),
+    likedBy: [],
+    unlikedBy: [],
+    comments: []
+  };
+
+  posts.push(newPost);
+  savePosts(posts);
+
+  return res.status(201).json({ message: "Post created", post: newPost });
+});
+
+// Get all posts
+app.get("/api/posts", (req, res) => {
+  const posts = loadPosts();
+  res.json(posts);
 });
