@@ -151,6 +151,41 @@ app.post("/create-post", (req, res) => {
   return res.status(201).json({ message: "Post created", post: newPost });
 });
 
+//Like Unlike post
+app.patch("/post-reaction/:id", (req, res) => {
+  const { id } = req.params;
+  const { userId, action } = req.body;
+  const posts = loadPosts();
+
+  const post = posts.find((p) => p.id === id);
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+
+  // Toggle Like
+  if (action === "like") {
+    if (post.likedBy.includes(userId)) {
+      post.likedBy = post.likedBy.filter((uid) => uid !== userId);
+    } else {
+      post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
+      post.likedBy.push(userId);
+    }
+  }
+
+  // Toggle Unlike
+  if (action === "unlike") {
+    if (post.unlikedBy.includes(userId)) {
+      post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
+    } else {
+      post.likedBy = post.likedBy.filter((uid) => uid !== userId);
+      post.unlikedBy.push(userId);
+    }
+  }
+
+  savePosts();
+  return res.status(200).json({ message: "Post updated", post });
+});
+
 // Get all posts
 app.get("/posts", (req, res) => {
   const posts = loadPosts();
