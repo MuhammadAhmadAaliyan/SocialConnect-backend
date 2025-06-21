@@ -158,6 +158,7 @@ app.patch("/post-reaction/:id", (req, res) => {
     const { userId, action } = req.body;
 
     if (!id || !userId || !action) {
+      console.log("🚨 One of the fields is missing!");
       return res.status(400).json({ message: "Missing required fields" });
     }
 
