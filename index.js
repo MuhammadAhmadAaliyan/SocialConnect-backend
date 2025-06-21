@@ -153,38 +153,47 @@ app.post("/create-post", (req, res) => {
 
 //Like Unlike post
 app.patch("/post-reaction/:id", (req, res) => {
-  const { id } = req.params;
-  const { userId, action } = req.body;
-  const posts = loadPosts();
+  try {
+    const { id } = req.params;
+    const { userId, action } = req.body;
 
-  const post = posts.find((p) => p.id === id);
-  if (!post) {
-    return res.status(404).json({ message: "Post not found" });
-  }
-
-  // Toggle Like
-  if (action === "like") {
-    if (post.likedBy.includes(userId)) {
-      post.likedBy = post.likedBy.filter((uid) => uid !== userId);
-    } else {
-      post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
-      post.likedBy.push(userId);
+    if (!id || !userId || !action) {
+      return res.status(400).json({ message: "Missing required fields" });
     }
-  }
 
-  // Toggle Unlike
-  if (action === "unlike") {
-    if (post.unlikedBy.includes(userId)) {
-      post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
-    } else {
-      post.likedBy = post.likedBy.filter((uid) => uid !== userId);
-      post.unlikedBy.push(userId);
+    const posts = loadPosts();
+    const post = posts.find((p) => p.id === id);
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
     }
-  }
 
-  savePosts();
-  return res.status(200).json({ message: "Post updated", post });
+    if (action === "like") {
+      if (post.likedBy.includes(userId)) {
+        post.likedBy = post.likedBy.filter((uid) => uid !== userId);
+      } else {
+        post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
+        post.likedBy.push(userId);
+      }
+    } else if (action === "unlike") {
+      if (post.unlikedBy.includes(userId)) {
+        post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
+      } else {
+        post.likedBy = post.likedBy.filter((uid) => uid !== userId);
+        post.unlikedBy.push(userId);
+      }
+    } else {
+      return res.status(400).json({ message: "Invalid action" });
+    }
+
+    savePosts(posts); // ✅ must pass posts if required
+    return res.status(200).json({ message: "Post updated", post });
+  } catch (error) {
+    console.error("PATCH /post-reaction/:id failed:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
+
 
 // Get all posts
 app.get("/posts", (req, res) => {
