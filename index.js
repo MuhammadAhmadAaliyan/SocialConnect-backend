@@ -65,7 +65,7 @@ app.get('/user/:email', (req, res) => {
   if(userIndex == -1){
     return res.status(404).json({ message: 'No user found.' });
   }else{
-    return res.status(200).json({ message: 'User found.', user: users[userIndex]});
+    return res.status(200).json({ message: 'User found.', userIndex: userIndex});
   }
 });
 
