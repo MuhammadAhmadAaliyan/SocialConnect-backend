@@ -80,6 +80,26 @@ app.patch('/reset-password', (req, res) => {
    return res.status(200).json({ message: 'Password updated successfully.' });
 });
 
+//Update User Info
+app.patch('/user/:id',(req, res) => {
+  const {id} = req.params;
+  const updates = req.body;
+  const users = loadUsers();
+
+  const userIndex = users.findIndex((user) => user.id === id);
+
+  const user = users[userIndex];
+
+  if(updates.name !== undefined) user.name = updates.name;
+  if(updates.avatar !== undefined) user.avatar = updates.avatar;
+  if(updates.bio !== undefined) user.bio = updates.bio;
+
+  users[userIndex] = user;
+  saveUsers(users);
+
+  return res.status(200).json({message: "Changes update Successfully"});
+});
+
 // ✅ Get All Users (Optional for testing)
 app.get('/users', (req, res) => {
   const users = loadUsers();
