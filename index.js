@@ -55,18 +55,29 @@ app.post('/login', (req, res) => {
   res.json({ message: 'Login successful', user });
 });
 
-//Reset User Password
-app.patch('/users', (req, response) => {
-  const {email, newPassword} = req.body;
+//Verify user
+app.get('/user/:email', (req, res) => {
+  const {email} = req.params;
   const users = loadUsers();
 
   const userIndex = users.findIndex(user => user.email === email);
 
   if(userIndex == -1){
     return res.status(404).json({ message: 'No user found.' });
+  }else{
+    return res.status(200).json({ message: 'User found.', user: users[userIndex]});
   }
+});
+
+//Reset User Password.
+app.patch('/reset-password', (req, res) => {
+  const {userIndex, newPassword} = req.body;
+  const users = loadUsers();
+
   users[userIndex].password = newPassword;
   saveUsers(users);
+
+   return res.status(200).json({ message: 'Password updated successfully.' });
 });
 
 // ✅ Get All Users (Optional for testing)
