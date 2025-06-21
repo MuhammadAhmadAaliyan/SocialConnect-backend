@@ -21,7 +21,7 @@
     "id": "p2",
     "userId": "u2",
     "text": "Here’s a snap from my trip 🌄",
-    "image": "https://placekitten.com/400/300",
+    "image": "https://picsum.photos/400/300",
     "timestamp": "2025-06-21T09:15:00Z",
     "likedBy": ["u1", "u3"],
     "unlikedBy": [],
@@ -46,22 +46,21 @@
     "comments": []
   },
   {
-  "id": "p4",
-  "userId": "u4",
-  "text": "Just finished designing a new login screen. Simplicity is beauty ✨",
-  "image": "https://placehold.co/600x400/png",
-  "timestamp": "2025-06-21T11:45:00Z",
-  "likedBy": ["u1", "u2"],
-  "unlikedBy": [],
-  "comments": [
-    {
-      "id": "c3",
-      "userId": "u1",
-      "avatar": "https://i.pravatar.cc/150?img=3",
-      "text": "Can't wait to see it in action!",
-      "timestamp": "2025-06-21T11:50:00Z"
-    }
-  ]
-}
-
+    "id": "p4",
+    "userId": "u4",
+    "text": "Just finished designing a new login screen. Simplicity is beauty ✨",
+    "image": "https://picsum.photos/600/400",
+    "timestamp": "2025-06-21T11:45:00Z",
+    "likedBy": ["u1", "u2"],
+    "unlikedBy": [],
+    "comments": [
+      {
+        "id": "c3",
+        "userId": "u1",
+        "avatar": "https://i.pravatar.cc/150?img=3",
+        "text": "Can't wait to see it in action!",
+        "timestamp": "2025-06-21T11:50:00Z"
+      }
+    ]
+  }
 ]
