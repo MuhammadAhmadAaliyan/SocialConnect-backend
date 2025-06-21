@@ -158,7 +158,6 @@ app.patch("/post-reaction/:id", (req, res) => {
     const { userId, action } = req.body;
 
     if (!id || !userId || !action) {
-      console.log("🚨 One of the fields is missing!");
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -169,32 +168,36 @@ app.patch("/post-reaction/:id", (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    if (action === "like") {
-      if (post.likedBy.includes(userId)) {
-        post.likedBy = post.likedBy.filter((uid) => uid !== userId);
-      } else {
+    switch (action) {
+      case "like_add":
+        if (!post.likedBy.includes(userId)) post.likedBy.push(userId);
         post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
-        post.likedBy.push(userId);
-      }
-    } else if (action === "unlike") {
-      if (post.unlikedBy.includes(userId)) {
-        post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
-      } else {
+        break;
+
+      case "like_remove":
         post.likedBy = post.likedBy.filter((uid) => uid !== userId);
-        post.unlikedBy.push(userId);
-      }
-    } else {
-      return res.status(400).json({ message: "Invalid action" });
+        break;
+
+      case "unlike_add":
+        if (!post.unlikedBy.includes(userId)) post.unlikedBy.push(userId);
+        post.likedBy = post.likedBy.filter((uid) => uid !== userId);
+        break;
+
+      case "unlike_remove":
+        post.unlikedBy = post.unlikedBy.filter((uid) => uid !== userId);
+        break;
+
+      default:
+        return res.status(400).json({ message: "Invalid action" });
     }
 
-    savePosts(posts); // ✅ must pass posts if required
+    savePosts(posts);
     return res.status(200).json({ message: "Post updated", post });
   } catch (error) {
     console.error("PATCH /post-reaction/:id failed:", error);
     return res.status(500).json({ message: "Server error", error: error.message });
   }
 });
-
 
 // Get all posts
 app.get("/posts", (req, res) => {
