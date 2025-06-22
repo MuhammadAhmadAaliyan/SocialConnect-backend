@@ -11,7 +11,6 @@
       {
         "id": "c1",
         "userId": "u2",
-        "avatar": "https://i.pravatar.cc/150?img=5",
         "text": "Welcome! 🎉",
         "timestamp": "2025-06-21T08:35:00Z"
       }
@@ -29,7 +28,6 @@
       {
         "id": "c2",
         "userId": "u3",
-        "avatar": "https://i.pravatar.cc/150?img=8",
         "text": "Wow, that looks amazing!",
         "timestamp": "2025-06-21T09:30:00Z"
       }
@@ -57,7 +55,6 @@
       {
         "id": "c3",
         "userId": "u1",
-        "avatar": "https://i.pravatar.cc/150?img=3",
         "text": "Can't wait to see it in action!",
         "timestamp": "2025-06-21T11:50:00Z"
       }
