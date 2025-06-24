@@ -209,12 +209,12 @@ app.post("/comment/:postId", (req, res) => {
     return res.status(400).json({ message: "Invalid action" });
   }
 
-  const post = posts.find(p => p.id === postId);
+  const post = posts.find(p => p.id == postId);
   const newComment = {
-    id: id,
-    userId: userId,
-    text: text,
-    timestamp: timestamp
+    id,
+    userId,
+    text,
+    timestamp
   };
 
   post.comments.push(newComment);
