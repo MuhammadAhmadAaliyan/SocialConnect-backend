@@ -199,6 +199,29 @@ app.patch("/post-reaction/:id", (req, res) => {
   }
 });
 
+//Adding new Comment
+app.post("/comment/:postId", (req, res) => {
+  const {postId} = req.params;
+  const {userId, text} = req.body;
+  const posts = loadPosts();
+
+  if(!userId || !text){
+    return res.status(400).json({ message: "Invalid action" });
+  }
+
+  const post = posts.find(p => p.id === postId);
+  const newComment = {
+    id: uuidv4(),
+    userId: userId,
+    text: text,
+    timestamp: new Date().toISOString()
+  };
+
+  post.comments.push(newComment);
+  savePosts(posts);
+  return res.status(201).json({ message: "Comment created"});
+});
+
 // Get all posts
 app.get("/posts", (req, res) => {
   const posts = loadPosts();
