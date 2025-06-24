@@ -214,7 +214,7 @@ app.post("/comment/:postId", (req, res) => {
     id: id,
     userId: userId,
     text: text,
-    timestamp: new Date().toISOString()
+    timestamp: timestamp
   };
 
   post.comments.push(newComment);
