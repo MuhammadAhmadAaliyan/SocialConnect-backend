@@ -126,7 +126,7 @@ app.listen(PORT, () => {
 
 //Create New Post
 app.post("/create-post", (req, res) => {
-  const { userId, text, image = "" } = req.body;
+  const { userId, text = "", image = "" } = req.body;
 
   if (!userId || !text) {
     return res.status(400).json({ message: "userId and text are required" });
