@@ -31,7 +31,7 @@ const savePosts = (posts) => {
   fs.writeFileSync("posts.json", JSON.stringify(posts, null, 2));
 };
 
-// ✅ Signup
+// Signup
 app.post('/signup', (req, res) => {
   const { name, email, password, id } = req.body;
   const users = loadUsers();
