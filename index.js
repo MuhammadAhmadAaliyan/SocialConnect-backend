@@ -222,6 +222,25 @@ app.post("/comment/:postId", (req, res) => {
   return res.status(201).json({ message: "Comment created"});
 });
 
+//Deleting User Account
+app.delete('/delete', (req, res) => {
+  const {userId} = req.params;
+  const users = loadUsers();
+  const posts = loadPosts();
+
+  if(!userId){
+    return res.status(400).json({ message: "Invalid action" });
+  }
+
+  const updateUsers = users.filter((u) => u.id != userId);
+  const updatePosts = posts.filter((p) => p.userId != userId);
+
+  savePosts(updatePosts);
+  saveUsers(updateUsers);
+
+   return res.status(200).json({ message: "Deletion Successful"});
+});
+
 // Get all posts
 app.get("/posts", (req, res) => {
   const posts = loadPosts();
