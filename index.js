@@ -223,7 +223,7 @@ app.post("/comment/:postId", (req, res) => {
 });
 
 //Deleting User Account
-app.delete('/delete', (req, res) => {
+app.delete('/delete/:userId', (req, res) => {
   const {userId} = req.params;
   const users = loadUsers();
   const posts = loadPosts();
