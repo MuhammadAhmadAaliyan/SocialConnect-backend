@@ -46,7 +46,8 @@ app.post('/signup', (req, res) => {
     email,
     password,
     avatar: '',
-    bio: ''
+    bio: '',
+    expoToken: ''
   };
 
   users.push(newUser);
@@ -54,6 +55,28 @@ app.post('/signup', (req, res) => {
 
   res.status(201).json({ message: 'Signup successful', user: newUser });
 });
+
+//Add expo notification token with user info
+app.post('/token', (req, res) => {
+  const { userId, token } = req.body;
+
+  if (!userId || !token) {
+    return res.status(400).json({ message: 'Missing userId or token' });
+  }
+
+  const users = loadUsers(); // e.g. from JSON file or DB
+  const user = users.find((u) => u.id === userId);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  user.expoToken = token;
+  saveUsers(users); // Save updated users list
+
+  return res.status(200).json({ message: 'Token saved successfully' });
+});
+
 
 // Login
 app.post('/login', (req, res) => {
