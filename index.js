@@ -77,7 +77,6 @@ app.post('/token', (req, res) => {
   return res.status(200).json({ message: 'Token saved successfully' });
 });
 
-
 // Login
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
