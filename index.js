@@ -258,21 +258,10 @@ app.post("/comment/:postId", (req, res) => {
   post.comments.push(newComment);
   savePosts(posts);
 
-const commenter = users.find((u) => u.id == userId);
-
-io.emit("commentUpdate", {
-  postId,
-  comment: {
-    id,
-    userId,
-    text,
-    timestamp,
-    user: {
-      name: commenter?.name,
-      avatar: commenter?.avatar,
-    },
-  },
-});
+  io.emit("commentUpdate", {
+    postId,
+    comment: newComment,
+  });
 
   return res.status(201).json({ message: "Comment created" });
 });
