@@ -134,10 +134,11 @@ app.get("/users", (req, res) => {
 
 //Create New Post
 app.post("/create-post", (req, res) => {
-  const { userId, text = "", image = "" } = req.body;
+  const { userId, text = "", images = [] } = req.body;
 
-  if (!userId || (!image && !text)) {
-    return res.status(400).json({ message: "userId and text are required" });
+  // Validate userId and at least one of text or images
+  if (!userId || (!text.trim() && (!Array.isArray(images) || images.length === 0))) {
+    return res.status(400).json({ message: "userId and either text or images are required" });
   }
 
   const posts = loadPosts();
@@ -146,7 +147,7 @@ app.post("/create-post", (req, res) => {
     id: uuidv4(),
     userId,
     text,
-    image,
+    images, // Save image array instead of single image
     timestamp: new Date().toISOString(),
     likedBy: [],
     unlikedBy: [],
