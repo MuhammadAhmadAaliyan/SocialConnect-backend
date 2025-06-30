@@ -6,7 +6,6 @@ const fs = require("fs");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 const app = express();
-const userSocketMap = new Map();
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -138,13 +137,8 @@ app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
 
   // Validate userId and at least one of text or images
-  if (
-    !userId ||
-    (!text.trim() && (!Array.isArray(images) || images.length === 0))
-  ) {
-    return res
-      .status(400)
-      .json({ message: "userId and either text or images are required" });
+  if (!userId || (!text.trim() && (!Array.isArray(images) || images.length === 0))) {
+    return res.status(400).json({ message: "userId and either text or images are required" });
   }
 
   const posts = loadPosts();
@@ -207,22 +201,11 @@ app.patch("/post-reaction/:id", (req, res) => {
     }
 
     savePosts(posts);
-
     io.emit("likeUpdate", {
       postId: id,
       likedBy: post.likedBy,
       unlikedBy: post.unlikedBy,
     });
-
-    if (post.userId !== userId && userSocketMap.has(post.userId)) {
-      const targetSocketId = userSocketMap.get(post.userId);
-      io.to(targetSocketId).emit("notification", {
-        type: "like",
-        fromUser: userId,
-        postId: id,
-        message: "Someone liked your post",
-      });
-    }
 
     return res.status(200).json({ message: "Post updated", post });
   } catch (error) {
@@ -259,16 +242,6 @@ app.post("/comment/:postId", (req, res) => {
     comment: newComment,
   });
 
-  if (post.userId !== userId && userSocketMap.has(post.userId)) {
-    const targetSocketId = userSocketMap.get(post.userId);
-    io.to(targetSocketId).emit("notification", {
-      type: "comment",
-      fromUser: userId,
-      postId,
-      message: "Someone commented on your post",
-    });
-  }
-
   return res.status(201).json({ message: "Comment created" });
 });
 
@@ -301,22 +274,10 @@ server.listen(PORT, () => {
   console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
 });
 
-//Socket Connection
 io.on("connection", (socket) => {
   console.log("🔌 User connected:", socket.id);
 
-  socket.on("registerUser", (userId) => {
-    userSocketMap.set(userId, socket.id);
-    console.log(`Registered user ${userId} -> socket ${socket.id}`);
-  });
-
   socket.on("disconnect", () => {
-    for (const [userId, sid] of userSocketMap.entries()) {
-      if (sid === socket.id) {
-        userSocketMap.delete(userId);
-        break;
-      }
-    }
-    console.log("User disconnected:", socket.id);
+    console.log("❌ User disconnected:", socket.id);
   });
 });
