@@ -136,7 +136,6 @@ app.get("/users", (req, res) => {
 app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
 
-  // Validate userId and at least one of text or images
   if (!userId || (!text.trim() && (!Array.isArray(images) || images.length === 0))) {
     return res.status(400).json({ message: "userId and either text or images are required" });
   }
@@ -147,7 +146,7 @@ app.post("/create-post", (req, res) => {
     id: uuidv4(),
     userId,
     text,
-    images, // Save image array instead of single image
+    images,
     timestamp: new Date().toISOString(),
     likedBy: [],
     unlikedBy: [],
@@ -278,6 +277,6 @@ io.on("connection", (socket) => {
   console.log("🔌 User connected:", socket.id);
 
   socket.on("disconnect", () => {
-    console.log("❌ User disconnected:", socket.id);
+    console.log("User disconnected:", socket.id);
   });
 });
