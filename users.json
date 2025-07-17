@@ -6,8 +6,8 @@
     "password": "alpha123",
     "avatar": "https://i.pravatar.cc/150?img=3",
     "bio": "Aspiring app developer. Coffee addict ☕ and code enthusiast 💻.",
-    "followers": [],
-    "followings": [],
+    "followers": ["u2", "u4", "u5", "u7", "u15"],
+    "followings": ["u2", "u3", "u4", "u5", "u6", "u15"],
     "postCount": 2
   },
   {
@@ -17,8 +17,8 @@
     "password": "fatima246",
     "avatar": "https://i.pravatar.cc/150?img=5",
     "bio": "Lover of nature 🌿, photography 📸, and building cool UIs with React Native!",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u3", "u6", "u10", "u15"],
+    "followings": ["u1", "u4", "u5"],
     "postCount": 2
   },
   {
@@ -28,8 +28,8 @@
     "password": "usman789",
     "avatar": "https://i.pravatar.cc/150?img=8",
     "bio": "",
-    "followers": [],
-    "followings": [],
+    "followers": ["u2", "u5", "u6"],
+    "followings": ["u1", "u2", "u4", "u7", "u8", "u10"],
     "postCount": 2
   },
   {
@@ -39,8 +39,8 @@
     "password": "sara1155",
     "avatar": "",
     "bio": "UI/UX designer by day, Netflix binger by night 🎨🍿.",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u2", "u3", "u6", "u7", "u9", "u15"],
+    "followings": ["u3", "u6", "u7"],
     "postCount": 2
   },
   {
@@ -50,8 +50,8 @@
     "password": "hamza000",
     "avatar": "https://i.pravatar.cc/150?img=12",
     "bio": "Android developer and anime lover 🎮🍜.",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u2"],
+    "followings": ["u1", "u4", "u6", "u10"],
     "postCount": 1
   },
   {
@@ -61,8 +61,8 @@
     "password": "ayesha1122",
     "avatar": "https://i.pravatar.cc/150?img=18",
     "bio": "Plant mom 🌱 | Dog lover 🐶 | Code whisperer 👩‍💻",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u4", "u5", "u8"],
+    "followings": ["u2", "u3", "u4"],
     "postCount": 1
   },
   {
@@ -72,8 +72,8 @@
     "password": "bilal2020",
     "avatar": "https://i.pravatar.cc/150?img=19",
     "bio": "Coffee and clean code ☕💡",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u3", "u4", "u6", "u8", "u10"],
+    "followings": ["u1", "u4", "u9", "u10", "u11", "u12", "u13", "u14", "u15"],
     "postCount": 1
   },
   {
@@ -83,8 +83,8 @@
     "password": "mehwish786",
     "avatar": "https://i.pravatar.cc/150?img=20",
     "bio": "Frontend wizard 🧙‍♀️✨",
-    "followers": [],
-    "followings": [],
+    "followers": ["u3", "u7"],
+    "followings": ["u2", "u6", "u9"],
     "postCount": 1
   },
   {
@@ -94,7 +94,7 @@
     "password": "zain456",
     "avatar": "https://i.pravatar.cc/150?img=25",
     "bio": "JS ninja and bug hunter 🔍🐞",
-    "followers": [],
+    "followers": ["u4", "u7", "u10"],
     "followings": [],
     "postCount": 1
   },
@@ -105,8 +105,8 @@
     "password": "hina321",
     "avatar": "https://i.pravatar.cc/150?img=28",
     "bio": "React Native is my superpower 💪📱",
-    "followers": [],
-    "followings": [],
+    "followers": ["u2", "u7", "u9"],
+    "followings": ["u3", "u4", "u5", "u15"],
     "postCount": 1
   },
   {
@@ -117,7 +117,7 @@
     "avatar": "https://i.pravatar.cc/150?img=33",
     "bio": "Learning never stops 🚀",
     "followers": [],
-    "followings": [],
+    "followings": ["u7", "u10"],
     "postCount": 0
   },
   {
@@ -128,7 +128,7 @@
     "avatar": "https://i.pravatar.cc/150?img=35",
     "bio": "Dancing with UI components 💃🎨",
     "followers": [],
-    "followings": [],
+    "followings": ["u7"],
     "postCount": 0
   },
   {
@@ -150,7 +150,7 @@
     "avatar": "https://i.pravatar.cc/150?img=39",
     "bio": "Code and cupcakes 🧁💻",
     "followers": [],
-    "followings": [],
+    "followings": ["u3", "u6", "u7", "u10"],
     "postCount": 0
   },
   {
@@ -160,8 +160,8 @@
     "password": "danish432",
     "avatar": "https://i.pravatar.cc/150?img=41",
     "bio": "Always building something! 🔧",
-    "followers": [],
-    "followings": [],
+    "followers": ["u1", "u2", "u4", "u10"],
+    "followings": ["u1", "u2", "u5"],
     "postCount": 1
   }
 ]
