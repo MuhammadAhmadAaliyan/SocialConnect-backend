@@ -5,41 +5,45 @@
     "text": "Excited to join Social Connect! 😊",
     "images": [],
     "timestamp": "2025-06-21T08:30:00Z",
-    "likedBy": ["u2", "u3", "u4", "u5", "u6"],
+    "likedBy": ["u2"],
     "unlikedBy": [],
     "comments": [
-      { "id": "c1", "userId": "u2", "text": "Welcome! 🎉", "timestamp": "2025-06-21T08:35:00Z" },
-      { "id": "c16", "userId": "u3", "text": "Let’s goooo 🚀", "timestamp": "2025-06-21T08:40:00Z" },
-      { "id": "c17", "userId": "u4", "text": "Nice to have you here 👋", "timestamp": "2025-06-21T08:42:00Z" }
+      {
+        "id": "c1",
+        "userId": "u2",
+        "text": "Welcome! 🎉",
+        "timestamp": "2025-06-21T08:35:00Z"
+      }
     ]
   },
   {
     "id": "p2",
     "userId": "u2",
     "text": "Here’s a snap from my trip 🌄",
-    "images": ["https://picsum.photos/id/1015/400/300"],
+    "images": [
+      "https://picsum.photos/id/1015/400/300"
+    ],
     "timestamp": "2025-06-21T09:15:00Z",
-    "likedBy": ["u1", "u3", "u5", "u6", "u8", "u10", "u12"],
+    "likedBy": ["u1", "u3"],
     "unlikedBy": [],
     "comments": [
-      { "id": "c2", "userId": "u3", "text": "Wow, that looks amazing!", "timestamp": "2025-06-21T09:30:00Z" },
-      { "id": "c18", "userId": "u5", "text": "What place is this? 🔥", "timestamp": "2025-06-21T09:40:00Z" },
-      { "id": "c19", "userId": "u6", "text": "Love the view 😍", "timestamp": "2025-06-21T09:42:00Z" },
-      { "id": "c20", "userId": "u10", "text": "Your photos are always great 📷", "timestamp": "2025-06-21T09:45:00Z" }
+      {
+        "id": "c2",
+        "userId": "u3",
+        "text": "Wow, that looks amazing!",
+        "timestamp": "2025-06-21T09:30:00Z"
+      }
     ]
   },
   {
     "id": "p3",
     "userId": "u3",
     "text": "Working on my new React Native project 🚀",
-    "images": [],
+    "images": ["https://picsum.photos/id/1016/400/300"],
     "timestamp": "2025-06-21T10:00:00Z",
-    "likedBy": ["u1", "u2", "u5"],
+    "likedBy": [],
     "unlikedBy": [],
-    "comments": [
-      { "id": "c3", "userId": "u1", "text": "Good luck!", "timestamp": "2025-06-21T10:10:00Z" },
-      { "id": "c4", "userId": "u2", "text": "Can't wait to try it 😎", "timestamp": "2025-06-21T10:15:00Z" }
-    ]
+    "comments": []
   },
   {
     "id": "p4",
@@ -55,7 +59,10 @@
     "id": "p5",
     "userId": "u1",
     "text": "Just finished my first UI concept!",
-    "images": [],
+    "images": [
+      "https://picsum.photos/id/1024/400/300",
+      "https://picsum.photos/id/1025/400/300"
+    ],
     "timestamp": "2025-06-22T08:00:00Z",
     "likedBy": ["u4", "u7", "u8"],
     "unlikedBy": [],
@@ -77,7 +84,7 @@
     "id": "p7",
     "userId": "u3",
     "text": "Debugging is my cardio 🏃‍♂️",
-    "images": [],
+    "images": ["https://picsum.photos/id/1032/400/300"],
     "timestamp": "2025-06-22T10:00:00Z",
     "likedBy": ["u6"],
     "unlikedBy": [],
@@ -87,7 +94,11 @@
     "id": "p8",
     "userId": "u4",
     "text": "Minimalist design rocks 🤘",
-    "images": [],
+    "images": [
+      "https://picsum.photos/id/1033/400/300",
+      "https://picsum.photos/id/1034/400/300",
+      "https://picsum.photos/id/1035/400/300"
+    ],
     "timestamp": "2025-06-22T11:00:00Z",
     "likedBy": ["u1", "u2", "u3", "u7"],
     "unlikedBy": [],
@@ -99,7 +110,12 @@
     "id": "p9",
     "userId": "u5",
     "text": "Testing animations with Reanimated 💫",
-    "images": [],
+    "images": [
+      "https://picsum.photos/id/1041/400/300",
+      "https://picsum.photos/id/1042/400/300",
+      "https://picsum.photos/id/1043/400/300",
+      "https://picsum.photos/id/1044/400/300"
+    ],
     "timestamp": "2025-06-22T12:00:00Z",
     "likedBy": [],
     "unlikedBy": [],
@@ -109,7 +125,7 @@
     "id": "p10",
     "userId": "u6",
     "text": "My plants are growing and so is my app! 🌿📱",
-    "images": [],
+    "images": ["https://picsum.photos/id/1050/400/300"],
     "timestamp": "2025-06-22T13:00:00Z",
     "likedBy": ["u3"],
     "unlikedBy": [],
@@ -134,7 +150,7 @@
     "id": "p12",
     "userId": "u8",
     "text": "Trying out new font pairings today 🔤",
-    "images": [],
+    "images": ["https://picsum.photos/id/1054/400/300"],
     "timestamp": "2025-06-22T15:00:00Z",
     "likedBy": [],
     "unlikedBy": [],
@@ -144,7 +160,10 @@
     "id": "p13",
     "userId": "u9",
     "text": "Anyone else obsessed with tailwind classes? 🎨",
-    "images": [],
+    "images": [
+      "https://picsum.photos/id/1061/400/300",
+      "https://picsum.photos/id/1062/400/300"
+    ],
     "timestamp": "2025-06-22T16:00:00Z",
     "likedBy": ["u8", "u10"],
     "unlikedBy": [],
@@ -156,7 +175,7 @@
     "id": "p14",
     "userId": "u10",
     "text": "Just published my app to Expo! 🎉",
-    "images": [],
+    "images": ["https://picsum.photos/id/1070/400/300"],
     "timestamp": "2025-06-22T17:00:00Z",
     "likedBy": ["u2", "u3", "u6", "u7"],
     "unlikedBy": [],
