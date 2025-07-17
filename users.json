@@ -5,7 +5,10 @@
     "email": "aliraza@example.com",
     "password": "alpha123",
     "avatar": "https://i.pravatar.cc/150?img=3",
-    "bio": "Aspiring app developer. Coffee addict ☕ and code enthusiast 💻."
+    "bio": "Aspiring app developer. Coffee addict ☕ and code enthusiast 💻.",
+    "followers": [],
+    "followings": [],
+    "postCount": 2
   },
   {
     "id": "u2",
@@ -13,7 +16,10 @@
     "email": "fatima@example.com",
     "password": "fatima246",
     "avatar": "https://i.pravatar.cc/150?img=5",
-   "bio": "Lover of nature 🌿, photography 📸, and building cool UIs with React Native!"
+    "bio": "Lover of nature 🌿, photography 📸, and building cool UIs with React Native!",
+    "followers": [],
+    "followings": [],
+    "postCount": 2
   },
   {
     "id": "u3",
@@ -21,15 +27,141 @@
     "email": "usman@example.com",
     "password": "usman789",
     "avatar": "https://i.pravatar.cc/150?img=8",
-    "bio": ""
+    "bio": "",
+    "followers": [],
+    "followings": [],
+    "postCount": 2
   },
   {
-  "id": "u4",
-  "name": "Sara Malik",
-  "email": "sara@example.com",
-  "password": "sara1155",
-  "avatar": "",
-  "bio": "UI/UX designer by day, Netflix binger by night 🎨🍿."
-}
-
+    "id": "u4",
+    "name": "Sara Malik",
+    "email": "sara@example.com",
+    "password": "sara1155",
+    "avatar": "",
+    "bio": "UI/UX designer by day, Netflix binger by night 🎨🍿.",
+    "followers": [],
+    "followings": [],
+    "postCount": 2
+  },
+  {
+    "id": "u5",
+    "name": "Hamza Qureshi",
+    "email": "hamza@example.com",
+    "password": "hamza000",
+    "avatar": "https://i.pravatar.cc/150?img=12",
+    "bio": "Android developer and anime lover 🎮🍜.",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u6",
+    "name": "Ayesha Javed",
+    "email": "ayesha@example.com",
+    "password": "ayesha1122",
+    "avatar": "https://i.pravatar.cc/150?img=18",
+    "bio": "Plant mom 🌱 | Dog lover 🐶 | Code whisperer 👩‍💻",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u7",
+    "name": "Bilal Asif",
+    "email": "bilal@example.com",
+    "password": "bilal2020",
+    "avatar": "https://i.pravatar.cc/150?img=19",
+    "bio": "Coffee and clean code ☕💡",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u8",
+    "name": "Mehwish Shah",
+    "email": "mehwish@example.com",
+    "password": "mehwish786",
+    "avatar": "https://i.pravatar.cc/150?img=20",
+    "bio": "Frontend wizard 🧙‍♀️✨",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u9",
+    "name": "Zain Ali",
+    "email": "zain@example.com",
+    "password": "zain456",
+    "avatar": "https://i.pravatar.cc/150?img=25",
+    "bio": "JS ninja and bug hunter 🔍🐞",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u10",
+    "name": "Hina Rehman",
+    "email": "hina@example.com",
+    "password": "hina321",
+    "avatar": "https://i.pravatar.cc/150?img=28",
+    "bio": "React Native is my superpower 💪📱",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  },
+  {
+    "id": "u11",
+    "name": "Tariq Mehmood",
+    "email": "tariq@example.com",
+    "password": "tariq999",
+    "avatar": "https://i.pravatar.cc/150?img=33",
+    "bio": "Learning never stops 🚀",
+    "followers": [],
+    "followings": [],
+    "postCount": 0
+  },
+  {
+    "id": "u12",
+    "name": "Komal Sheikh",
+    "email": "komal@example.com",
+    "password": "komal123",
+    "avatar": "https://i.pravatar.cc/150?img=35",
+    "bio": "Dancing with UI components 💃🎨",
+    "followers": [],
+    "followings": [],
+    "postCount": 0
+  },
+  {
+    "id": "u13",
+    "name": "Rehan Arif",
+    "email": "rehan@example.com",
+    "password": "rehan555",
+    "avatar": "https://i.pravatar.cc/150?img=37",
+    "bio": "Cricket, code, sleep, repeat 🏏💻😴",
+    "followers": [],
+    "followings": [],
+    "postCount": 0
+  },
+  {
+    "id": "u14",
+    "name": "Mariam Siddiqui",
+    "email": "mariam@example.com",
+    "password": "mariam111",
+    "avatar": "https://i.pravatar.cc/150?img=39",
+    "bio": "Code and cupcakes 🧁💻",
+    "followers": [],
+    "followings": [],
+    "postCount": 0
+  },
+  {
+    "id": "u15",
+    "name": "Danish Ali",
+    "email": "danish@example.com",
+    "password": "danish432",
+    "avatar": "https://i.pravatar.cc/150?img=41",
+    "bio": "Always building something! 🔧",
+    "followers": [],
+    "followings": [],
+    "postCount": 1
+  }
 ]

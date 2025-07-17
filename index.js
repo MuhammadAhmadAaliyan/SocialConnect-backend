@@ -57,6 +57,9 @@ app.post("/signup", (req, res) => {
     password,
     avatar: "",
     bio: "",
+    followers: [],
+    followings: [],
+    postCount: 0
   };
 
   users.push(newUser);
@@ -141,6 +144,9 @@ app.post("/create-post", (req, res) => {
   }
 
   const posts = loadPosts();
+  const users = loadUsers();
+
+  const user = users.find(u => u.id == userId);
 
   const newPost = {
     id: uuidv4(),
@@ -153,8 +159,11 @@ app.post("/create-post", (req, res) => {
     comments: [],
   };
 
+  user.postCount++;
+
   posts.push(newPost);
   savePosts(posts);
+  saveUsers(users);
 
   return res.status(201).json({ message: "Post created", post: newPost });
 });

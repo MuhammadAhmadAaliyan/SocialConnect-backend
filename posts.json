@@ -5,32 +5,27 @@
     "text": "Excited to join Social Connect! 😊",
     "images": [],
     "timestamp": "2025-06-21T08:30:00Z",
-    "likedBy": ["u2"],
+    "likedBy": ["u2", "u3", "u4", "u5", "u6"],
     "unlikedBy": [],
     "comments": [
-      {
-        "id": "c1",
-        "userId": "u2",
-        "text": "Welcome! 🎉",
-        "timestamp": "2025-06-21T08:35:00Z"
-      }
+      { "id": "c1", "userId": "u2", "text": "Welcome! 🎉", "timestamp": "2025-06-21T08:35:00Z" },
+      { "id": "c16", "userId": "u3", "text": "Let’s goooo 🚀", "timestamp": "2025-06-21T08:40:00Z" },
+      { "id": "c17", "userId": "u4", "text": "Nice to have you here 👋", "timestamp": "2025-06-21T08:42:00Z" }
     ]
   },
   {
     "id": "p2",
     "userId": "u2",
     "text": "Here’s a snap from my trip 🌄",
-    "images": ["https://picsum.photos/id/1015/400/300", "https://picsum.photos/id/1025/400/300", "https://picsum.photos/id/1043/400/300"],
+    "images": ["https://picsum.photos/id/1015/400/300"],
     "timestamp": "2025-06-21T09:15:00Z",
-    "likedBy": ["u1", "u3"],
+    "likedBy": ["u1", "u3", "u5", "u6", "u8", "u10", "u12"],
     "unlikedBy": [],
     "comments": [
-      {
-        "id": "c2",
-        "userId": "u3",
-        "text": "Wow, that looks amazing!",
-        "timestamp": "2025-06-21T09:30:00Z"
-      }
+      { "id": "c2", "userId": "u3", "text": "Wow, that looks amazing!", "timestamp": "2025-06-21T09:30:00Z" },
+      { "id": "c18", "userId": "u5", "text": "What place is this? 🔥", "timestamp": "2025-06-21T09:40:00Z" },
+      { "id": "c19", "userId": "u6", "text": "Love the view 😍", "timestamp": "2025-06-21T09:42:00Z" },
+      { "id": "c20", "userId": "u10", "text": "Your photos are always great 📷", "timestamp": "2025-06-21T09:45:00Z" }
     ]
   },
   {
@@ -39,9 +34,12 @@
     "text": "Working on my new React Native project 🚀",
     "images": [],
     "timestamp": "2025-06-21T10:00:00Z",
-    "likedBy": [],
+    "likedBy": ["u1", "u2", "u5"],
     "unlikedBy": [],
-    "comments": []
+    "comments": [
+      { "id": "c3", "userId": "u1", "text": "Good luck!", "timestamp": "2025-06-21T10:10:00Z" },
+      { "id": "c4", "userId": "u2", "text": "Can't wait to try it 😎", "timestamp": "2025-06-21T10:15:00Z" }
+    ]
   },
   {
     "id": "p4",
@@ -51,13 +49,132 @@
     "timestamp": "2025-06-21T11:45:00Z",
     "likedBy": ["u1", "u2"],
     "unlikedBy": [],
+    "comments": []
+  },
+  {
+    "id": "p5",
+    "userId": "u1",
+    "text": "Just finished my first UI concept!",
+    "images": [],
+    "timestamp": "2025-06-22T08:00:00Z",
+    "likedBy": ["u4", "u7", "u8"],
+    "unlikedBy": [],
     "comments": [
-      {
-        "id": "c3",
-        "userId": "u1",
-        "text": "Can't wait to see it in action!",
-        "timestamp": "2025-06-21T11:50:00Z"
-      }
+      { "id": "c5", "userId": "u4", "text": "Looks clean!", "timestamp": "2025-06-22T08:10:00Z" }
+    ]
+  },
+  {
+    "id": "p6",
+    "userId": "u2",
+    "text": "Exploring component libraries today 📚",
+    "images": [],
+    "timestamp": "2025-06-22T09:00:00Z",
+    "likedBy": [],
+    "unlikedBy": [],
+    "comments": []
+  },
+  {
+    "id": "p7",
+    "userId": "u3",
+    "text": "Debugging is my cardio 🏃‍♂️",
+    "images": [],
+    "timestamp": "2025-06-22T10:00:00Z",
+    "likedBy": ["u6"],
+    "unlikedBy": [],
+    "comments": []
+  },
+  {
+    "id": "p8",
+    "userId": "u4",
+    "text": "Minimalist design rocks 🤘",
+    "images": [],
+    "timestamp": "2025-06-22T11:00:00Z",
+    "likedBy": ["u1", "u2", "u3", "u7"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c6", "userId": "u7", "text": "Minimalist FTW!", "timestamp": "2025-06-22T11:10:00Z" }
+    ]
+  },
+  {
+    "id": "p9",
+    "userId": "u5",
+    "text": "Testing animations with Reanimated 💫",
+    "images": [],
+    "timestamp": "2025-06-22T12:00:00Z",
+    "likedBy": [],
+    "unlikedBy": [],
+    "comments": []
+  },
+  {
+    "id": "p10",
+    "userId": "u6",
+    "text": "My plants are growing and so is my app! 🌿📱",
+    "images": [],
+    "timestamp": "2025-06-22T13:00:00Z",
+    "likedBy": ["u3"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c7", "userId": "u3", "text": "That’s so wholesome 💚", "timestamp": "2025-06-22T13:05:00Z" }
+    ]
+  },
+  {
+    "id": "p11",
+    "userId": "u7",
+    "text": "Dark mode or light mode? 🤔",
+    "images": [],
+    "timestamp": "2025-06-22T14:00:00Z",
+    "likedBy": ["u1", "u4", "u5", "u6"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c8", "userId": "u1", "text": "Dark mode forever 🌚", "timestamp": "2025-06-22T14:05:00Z" },
+      { "id": "c9", "userId": "u6", "text": "Light mode hurts 😅", "timestamp": "2025-06-22T14:06:00Z" }
+    ]
+  },
+  {
+    "id": "p12",
+    "userId": "u8",
+    "text": "Trying out new font pairings today 🔤",
+    "images": [],
+    "timestamp": "2025-06-22T15:00:00Z",
+    "likedBy": [],
+    "unlikedBy": [],
+    "comments": []
+  },
+  {
+    "id": "p13",
+    "userId": "u9",
+    "text": "Anyone else obsessed with tailwind classes? 🎨",
+    "images": [],
+    "timestamp": "2025-06-22T16:00:00Z",
+    "likedBy": ["u8", "u10"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c10", "userId": "u8", "text": "Yes! Utility-first all the way!", "timestamp": "2025-06-22T16:10:00Z" }
+    ]
+  },
+  {
+    "id": "p14",
+    "userId": "u10",
+    "text": "Just published my app to Expo! 🎉",
+    "images": [],
+    "timestamp": "2025-06-22T17:00:00Z",
+    "likedBy": ["u2", "u3", "u6", "u7"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c11", "userId": "u7", "text": "Send the link 🔗", "timestamp": "2025-06-22T17:05:00Z" }
+    ]
+  },
+  {
+    "id": "p15",
+    "userId": "u15",
+    "text": "Feature request: Auto bug fixer 🤖",
+    "images": [],
+    "timestamp": "2025-06-22T18:00:00Z",
+    "likedBy": ["u1", "u2"],
+    "unlikedBy": [],
+    "comments": [
+      { "id": "c12", "userId": "u2", "text": "That would be a dream 😂", "timestamp": "2025-06-22T18:05:00Z" },
+      { "id": "c13", "userId": "u1", "text": "Please make this real 🙏", "timestamp": "2025-06-22T18:06:00Z" }
     ]
   }
 ]
