@@ -159,6 +159,20 @@ app.get("/suggested-users/:userId", (req, res) => {
   res.json(suggestedUsers);
 });
 
+//get specific user
+app.get("/specific-user/:userId", (req, res) => {
+  const {userId} = req.params;
+  const users = loadUsers();
+
+  const user = users.find(u => u.id == userId);
+    if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.json(user);
+
+});
+
 //Create New Post
 app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
