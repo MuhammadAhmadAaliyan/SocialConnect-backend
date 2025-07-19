@@ -135,6 +135,30 @@ app.get("/users", (req, res) => {
   res.json(users);
 });
 
+//get suggested users
+app.get("suggested-users/:userId", (req, res) => {
+  const {userId} = req.params;
+  const users = loadUsers();
+
+  const currentUser = users.find(user => user.id == userId);
+
+  const userFollowings = currentUser.followings || [];
+
+  let suggestedUsers = [];
+
+  if(userFollowings.length > 0){
+    suggestedUsers = users.filter(user => user.id != userId)
+    .sort((a, b) => b.followers.length - a.followers.length)
+    .slice(0, 10)
+  }else{
+        suggestedUsers = users.filter(user => user.id != userId && !userFollowings.includes(userId))
+    .sort((a, b) => b.followers.length - a.followers.length)
+    .slice(0, 10)
+  }
+
+  res.json(suggestedUsers);
+})
+
 //Create New Post
 app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
@@ -276,6 +300,60 @@ app.delete("/delete/:userId", (req, res) => {
 app.get("/posts", (req, res) => {
   const posts = loadPosts();
   res.json(posts);
+});
+
+// Get posts based on user followings
+app.get("/following-posts/:userId", (req, res) =>{
+  const {userId} = req.params;
+  const users = loadUsers();
+  const posts = loadPosts()
+
+  const user = users.find(u => u.id === userId);
+
+   if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  const followingIds = user.followings || [];
+
+  const followingsPosts = posts.filter(p => followingIds.includes(p.userId) || p.userId == userId);
+
+  res.json(followingsPosts);
+});
+
+//Get posts according to popularity
+app.get("/popular-posts", (req, res) => {
+  const posts = loadPosts();
+  const users = loadUsers();
+
+let popularPosts = posts
+  .map(post => {
+    const postAuthor = users.find(u => u.id === post.userId);
+    const followerCount = postAuthor.followers.length || 0;
+
+    return {
+      ...post,
+      popularity:
+        (post.likedBy.length || 0) +
+        (post.comments.length || 0) +
+        followerCount
+    };
+  })
+  .sort((a, b) => b.popularity - a.popularity)
+  .slice(0, 10);
+
+  res.json(popularPosts);
+
+});
+
+//Get user's own posts
+app.get("/own-post/:userId", (req, res) => {
+  const {userId} = req.params;
+  const posts = loadPosts();
+
+  const ownPosts = posts.filter(post => post.userId == userId);
+
+  res.json(ownPosts);
 });
 
 server.listen(PORT, () => {
