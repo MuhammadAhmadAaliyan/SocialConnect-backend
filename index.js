@@ -136,7 +136,7 @@ app.get("/users", (req, res) => {
 });
 
 //get suggested users
-app.get("suggested-users/:userId", (req, res) => {
+app.get("/suggested-users/:userId", (req, res) => {
   const {userId} = req.params;
   const users = loadUsers();
 
@@ -157,7 +157,7 @@ app.get("suggested-users/:userId", (req, res) => {
   }
 
   res.json(suggestedUsers);
-})
+});
 
 //Create New Post
 app.post("/create-post", (req, res) => {
