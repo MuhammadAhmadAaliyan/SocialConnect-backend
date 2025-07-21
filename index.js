@@ -188,11 +188,11 @@ app.post("/connections", (req, res) => {
   const isAlreadyFollow = followingUser.followings.includes(followUser);
 
   if(isAlreadyFollow){
-    followUser = followUser.followers.filter(id => id != currentUserId);
-    followingUser = followingUser.followings.filter(id => id != userId);
+    followUser.followers = followUser.followers.filter(id => id != currentUserId);
+    followingUser.followings = followingUser.followings.filter(id => id != userId);
   }else{
-    followUser = followUser.followers.push(currentUserId);
-    followingUser = followingUser.followings.push(userId);
+    followUser.followers.push(currentUserId);
+    followingUser.followings.push(userId);
   }
 
   saveUsers(users);
