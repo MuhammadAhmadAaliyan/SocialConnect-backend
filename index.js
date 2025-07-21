@@ -173,6 +173,27 @@ app.get("/specific-user/:userId", (req, res) => {
 
 });
 
+//update user followers and followings
+app.post("/connections", (req, res) => {
+  const {userId, currentUserId} = req.body;
+  const users = loadUsers();
+
+  const followUser = users.find(u => u.id == userId);
+  const followingUser = users.find(u => u.id == currentUserId);
+
+  const isAlreadyFollow = followingUser.followings.includes(followUser);
+
+  if(isAlreadyFollow){
+    followUser = followUser.followers.filter(id => id != currentUserId);
+    followingUser = followingUser.followings.filter(id => id != userId);
+  }else{
+    followUser = followUser.followers.push(currentUserId);
+    followingUser = followingUser.followings.push(userId);
+  }
+
+  saveUsers(users);
+});
+
 //Create New Post
 app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
