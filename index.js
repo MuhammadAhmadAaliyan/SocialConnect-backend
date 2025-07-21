@@ -185,7 +185,7 @@ app.post("/connections", (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  const isAlreadyFollow = followingUser.followings.includes(followUser);
+  const isAlreadyFollow = followingUser.followings.includes(userId);
 
   if(isAlreadyFollow){
     followUser.followers = followUser.followers.filter(id => id != currentUserId);
