@@ -181,6 +181,10 @@ app.post("/connections", (req, res) => {
   const followUser = users.find(u => u.id == userId);
   const followingUser = users.find(u => u.id == currentUserId);
 
+  if(!followUser && !followingUser){
+    return res.status(404).json({ message: "User not found" });
+  }
+
   const isAlreadyFollow = followingUser.followings.includes(followUser);
 
   if(isAlreadyFollow){
@@ -192,6 +196,10 @@ app.post("/connections", (req, res) => {
   }
 
   saveUsers(users);
+
+    return res.status(200).json({
+    message: isAlreadyFollow ? "Unfollowed successfully" : "Followed successfully",
+  });
 });
 
 //Create New Post
