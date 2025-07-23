@@ -59,7 +59,7 @@ app.post("/signup", (req, res) => {
     bio: "",
     followers: [],
     followings: [],
-    postCount: 0
+    postCount: 0,
   };
 
   users.push(newUser);
@@ -137,23 +137,25 @@ app.get("/users", (req, res) => {
 
 //get suggested users
 app.get("/suggested-users/:userId", (req, res) => {
-  const {userId} = req.params;
+  const { userId } = req.params;
   const users = loadUsers();
 
-  const currentUser = users.find(user => user.id == userId);
+  const currentUser = users.find((user) => user.id == userId);
 
   const userFollowings = currentUser.followings || [];
 
   let suggestedUsers = [];
 
-  if(userFollowings.length > 0){
-    suggestedUsers = users.filter(user => user.id != userId)
-    .sort((a, b) => b.followers.length - a.followers.length)
-    .slice(0, 10)
-  }else{
-        suggestedUsers = users.filter(user => user.id != userId && !userFollowings.includes(userId))
-    .sort((a, b) => b.followers.length - a.followers.length)
-    .slice(0, 10)
+  if (userFollowings.length > 0) {
+    suggestedUsers = users
+      .filter((user) => user.id != userId)
+      .sort((a, b) => b.followers.length - a.followers.length)
+      .slice(0, 10);
+  } else {
+    suggestedUsers = users
+      .filter((user) => user.id != userId && !userFollowings.includes(userId))
+      .sort((a, b) => b.followers.length - a.followers.length)
+      .slice(0, 10);
   }
 
   res.json(suggestedUsers);
@@ -161,44 +163,49 @@ app.get("/suggested-users/:userId", (req, res) => {
 
 //get specific user
 app.get("/specific-user/:userId", (req, res) => {
-  const {userId} = req.params;
+  const { userId } = req.params;
   const users = loadUsers();
 
-  const user = users.find(u => u.id == userId);
-    if (!user) {
+  const user = users.find((u) => u.id == userId);
+  if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
 
   res.json(user);
-
 });
 
 //update user followers and followings
 app.post("/connections", (req, res) => {
-  const {userId, currentUserId} = req.body;
+  const { userId, currentUserId } = req.body;
   const users = loadUsers();
 
-  const followUser = users.find(u => u.id == userId);
-  const followingUser = users.find(u => u.id == currentUserId);
+  const followUser = users.find((u) => u.id == userId);
+  const followingUser = users.find((u) => u.id == currentUserId);
 
-  if(!followUser && !followingUser){
+  if (!followUser && !followingUser) {
     return res.status(404).json({ message: "User not found" });
   }
 
   const isAlreadyFollow = followingUser.followings.includes(userId);
 
-  if(isAlreadyFollow){
-    followUser.followers = followUser.followers.filter(id => id != currentUserId);
-    followingUser.followings = followingUser.followings.filter(id => id != userId);
-  }else{
+  if (isAlreadyFollow) {
+    followUser.followers = followUser.followers.filter(
+      (id) => id != currentUserId
+    );
+    followingUser.followings = followingUser.followings.filter(
+      (id) => id != userId
+    );
+  } else {
     followUser.followers.push(currentUserId);
     followingUser.followings.push(userId);
   }
 
   saveUsers(users);
 
-    return res.status(200).json({
-    message: isAlreadyFollow ? "Unfollowed successfully" : "Followed successfully",
+  return res.status(200).json({
+    message: isAlreadyFollow
+      ? "Unfollowed successfully"
+      : "Followed successfully",
   });
 });
 
@@ -206,14 +213,19 @@ app.post("/connections", (req, res) => {
 app.post("/create-post", (req, res) => {
   const { userId, text = "", images = [] } = req.body;
 
-  if (!userId || (!text.trim() && (!Array.isArray(images) || images.length === 0))) {
-    return res.status(400).json({ message: "userId and either text or images are required" });
+  if (
+    !userId ||
+    (!text.trim() && (!Array.isArray(images) || images.length === 0))
+  ) {
+    return res
+      .status(400)
+      .json({ message: "userId and either text or images are required" });
   }
 
   const posts = loadPosts();
   const users = loadUsers();
 
-  const user = users.find(u => u.id == userId);
+  const user = users.find((u) => u.id == userId);
 
   const newPost = {
     id: uuidv4(),
@@ -346,20 +358,22 @@ app.get("/posts", (req, res) => {
 });
 
 // Get posts based on user followings
-app.get("/following-posts/:userId", (req, res) =>{
-  const {userId} = req.params;
+app.get("/following-posts/:userId", (req, res) => {
+  const { userId } = req.params;
   const users = loadUsers();
-  const posts = loadPosts()
+  const posts = loadPosts();
 
-  const user = users.find(u => u.id === userId);
+  const user = users.find((u) => u.id === userId);
 
-   if (!user) {
+  if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
 
   const followingIds = user.followings || [];
 
-  const followingsPosts = posts.filter(p => followingIds.includes(p.userId) || p.userId == userId);
+  const followingsPosts = posts.filter(
+    (p) => followingIds.includes(p.userId) || p.userId == userId
+  );
 
   res.json(followingsPosts);
 });
@@ -369,55 +383,58 @@ app.get("/popular-posts", (req, res) => {
   const posts = loadPosts();
   const users = loadUsers();
 
-let popularPosts = posts
-  .map(post => {
-    const postAuthor = users.find(u => u.id === post.userId);
-    const followerCount = postAuthor.followers.length || 0;
+  let popularPosts = posts
+    .map((post) => {
+      const postAuthor = users.find((u) => u.id === post.userId);
+      const followerCount = postAuthor.followers.length || 0;
 
-    return {
-      ...post,
-      popularity:
-        (post.likedBy.length || 0) +
-        (post.comments.length || 0) +
-        followerCount
-    };
-  })
-  .sort((a, b) => b.popularity - a.popularity)
-  .slice(0, 10);
+      return {
+        ...post,
+        popularity:
+          (post.likedBy.length || 0) +
+          (post.comments.length || 0) +
+          followerCount,
+      };
+    })
+    .sort((a, b) => b.popularity - a.popularity)
+    .slice(0, 10);
 
   res.json(popularPosts);
-
 });
 
 //Get user's own posts
 app.get("/own-post/:userId", (req, res) => {
-  const {userId} = req.params;
+  const { userId } = req.params;
   const posts = loadPosts();
 
-  const ownPosts = posts.filter(post => post.userId == userId);
+  const ownPosts = posts.filter((post) => post.userId == userId);
 
   res.json(ownPosts);
 });
 
 //update post
 app.patch("/edit-post/:postId", (req, res) => {
-  const {postId} = req.params;
+  const { postId } = req.params;
   const postUpdates = req.body;
 
   const posts = loadPosts();
 
-  const postIndex = posts.findIndex(p => p.id == postId);
-    if (postIndex === -1) {
+  const postIndex = posts.findIndex((p) => p.id == postId);
+  if (postIndex === -1) {
     return res.status(404).json({ message: "Post not found" });
   }
 
-  if(postUpdates.text) posts[postIndex].text = postUpdates.text;
-  if(postUpdates.images.length > 0) posts[postIndex].images = [...posts[postIndex].images, postUpdates.images];
+  if (postUpdates.text) posts[postIndex].text = postUpdates.text;
+  if (postUpdates.images.length > 0) {
+    posts[postIndex].images = postUpdates.images;
+  } else {
+    posts[postIndex].images = [];
+  }
 
   savePosts(posts);
 
- res.json({ message: "Post updated successfully"});
-})
+  res.json({ message: "Post updated successfully" });
+});
 
 server.listen(PORT, () => {
   console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
