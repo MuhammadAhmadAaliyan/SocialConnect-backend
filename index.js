@@ -436,6 +436,22 @@ app.patch("/edit-post/:postId", (req, res) => {
   res.json({ message: "Post updated successfully" });
 });
 
+//delete post
+app.delete("/delete-post/:postId", (req, res) => {
+  const { postId } = req.params;
+  const posts = loadPosts();
+
+  if (!postId) {
+    return res.status(400).json({ message: "Invalid action" });
+  }
+
+  const updatedPosts = posts.filter((p) => p.id != postId);
+
+  savePosts(updatedPosts);
+  
+  return res.status(200).json({ message: "Post deleted successfully" });
+});
+
 server.listen(PORT, () => {
   console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
 });
