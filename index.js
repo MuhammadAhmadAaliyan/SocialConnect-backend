@@ -400,7 +400,7 @@ app.get("/own-post/:userId", (req, res) => {
 });
 
 //update post
-app.patch("edit-post", (req, res) => {
+app.patch("/edit-post/:postId", (req, res) => {
   const {postId} = req.params;
   const postUpdates = req.body;
 
