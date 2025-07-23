@@ -399,6 +399,26 @@ app.get("/own-post/:userId", (req, res) => {
   res.json(ownPosts);
 });
 
+//update post
+app.patch("edit-post", (req, res) => {
+  const {postId} = req.params;
+  const postUpdates = req.body;
+
+  const posts = loadPosts();
+
+  const postIndex = posts.findIndex(p => p.id == postId);
+    if (postIndex === -1) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+
+  if(postUpdates.text) posts[postIndex].text = postUpdates.text;
+  if(postUpdates.images.length > 0) posts[postIndex].images = [...posts[postIndex].images, postUpdates.images];
+
+  savePosts(posts);
+
+ res.json({ message: "Post updated successfully"});
+})
+
 server.listen(PORT, () => {
   console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
 });
