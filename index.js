@@ -468,7 +468,32 @@ app.get("/messages/:user1/:user2", (req, res) => {
   res.json(chat);
 });
 
-// Socket.IO for real-time chat
+app.post("/messages", (req, res) => {
+  const { senderId, receiverId, text } = req.body;
+
+  if (!senderId || !receiverId || !text) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  const newMsg = {
+    id: uuidv4(),
+    sender: senderId,
+    receiver: receiverId,
+    text,
+    timestamp: new Date().toISOString(),
+  };
+
+  const msgs = loadMessages();
+  msgs.push(newMsg);
+  saveMessages(msgs);
+
+  // Emit via socket.io for real-time updates
+  io.to(receiverId).emit("receiveMessage", newMsg);
+
+  res.status(201).json({ message: "Message sent successfully.", data: newMsg });
+});
+
+// === Socket.IO ===
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
@@ -477,12 +502,12 @@ io.on("connection", (socket) => {
     console.log(`User ${userId} joined room`);
   });
 
-  socket.on("sendMessage", ({ senderId, recieverId, text }) => {
+  socket.on("sendMessage", ({ senderId, receiverId, text }) => {
     const newMsg = {
       id: uuidv4(),
       text,
       sender: senderId,
-      receiver: recieverId,
+      receiver: receiverId,
       timestamp: new Date().toISOString(),
     };
 
@@ -490,7 +515,7 @@ io.on("connection", (socket) => {
     msgs.push(newMsg);
     saveMessages(msgs);
 
-    io.to(recieverId).emit("receiveMessage", newMsg);
+    io.to(receiverId).emit("receiveMessage", newMsg);
   });
 
   socket.on("disconnect", () => {
