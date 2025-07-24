@@ -31,6 +31,9 @@ const loadPosts = () => {
   return JSON.parse(data);
 };
 
+//load messages
+const loadMessages = () => (fs.existsSync("messages.json") ? JSON.parse(fs.readFileSync("messages.json", "utf-8")) : []);
+
 //Save users to JSON file
 const saveUsers = (users) => {
   fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
@@ -40,6 +43,9 @@ const saveUsers = (users) => {
 const savePosts = (posts) => {
   fs.writeFileSync("posts.json", JSON.stringify(posts, null, 2));
 };
+
+//save messages
+const saveMessages = (m) => fs.writeFileSync("messages.json", JSON.stringify(m, null, 2));
 
 // Signup
 app.post("/signup", (req, res) => {
@@ -452,14 +458,47 @@ app.delete("/delete-post/:postId", (req, res) => {
   return res.status(200).json({ message: "Post deleted successfully" });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
+app.get("/messages/:user1/:user2", (req, res) => {
+  const { user1, user2 } = req.params;
+  const msgs = loadMessages();
+  const chat = msgs.filter(m =>
+    (m.sender === user1 && m.receiver === user2) ||
+    (m.sender === user2 && m.receiver === user1)
+  );
+  res.json(chat);
 });
 
+// Socket.IO for real-time chat
 io.on("connection", (socket) => {
-  console.log("🔌 User connected:", socket.id);
+  console.log("User connected:", socket.id);
+
+  socket.on("joinRoom", (userId) => {
+    socket.join(userId);
+    console.log(`User ${userId} joined room`);
+  });
+
+  socket.on("sendMessage", ({ from, to, text }) => {
+    const newMsg = {
+      id: uuidv4(),
+      text,
+      sender: from,
+      receiver: to,
+      timestamp: new Date().toISOString(),
+    };
+
+    const msgs = loadMessages();
+    msgs.push(newMsg);
+    saveMessages(msgs);
+
+    io.to(to).emit("receiveMessage", newMsg);
+  });
 
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });
 });
+
+server.listen(PORT, () => {
+  console.log(`Server + Socket.IO running on http://localhost:${PORT}`);
+});
+
