@@ -458,7 +458,8 @@ app.delete("/delete-post/:postId", (req, res) => {
   return res.status(200).json({ message: "Post deleted successfully" });
 });
 
-app.get("/messages/:user1/:user2", (req, res) => {
+//delete messages
+app.get("/delete-messages/:user1/:user2", (req, res) => {
   const { user1, user2 } = req.params;
   const msgs = loadMessages();
   const chat = msgs.filter(m =>
@@ -493,7 +494,7 @@ app.post("/messages", (req, res) => {
   res.status(201).json({ message: "Message sent successfully.", data: newMsg });
 });
 
-// === Socket.IO ===
+//Real time chat
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
