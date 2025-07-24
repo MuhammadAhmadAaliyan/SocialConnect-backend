@@ -458,8 +458,8 @@ app.delete("/delete-post/:postId", (req, res) => {
   return res.status(200).json({ message: "Post deleted successfully" });
 });
 
-//delete messages
-app.get("/delete-messages/:user1/:user2", (req, res) => {
+//read messages
+app.get("/messages/:user1/:user2", (req, res) => {
   const { user1, user2 } = req.params;
   const msgs = loadMessages();
   const chat = msgs.filter(m =>
@@ -469,6 +469,7 @@ app.get("/delete-messages/:user1/:user2", (req, res) => {
   res.json(chat);
 });
 
+//create messages
 app.post("/messages", (req, res) => {
   const { senderId, receiverId, text } = req.body;
 
@@ -493,6 +494,25 @@ app.post("/messages", (req, res) => {
 
   res.status(201).json({ message: "Message sent successfully.", data: newMsg });
 });
+
+//delete messages
+app.delete("/delete-messages/:user1/:user2", (req, res) => {
+  const { user1, user2 } = req.params;
+  let messages = loadMessages();
+
+  // Filter out messages between user1 and user2
+  messages = messages.filter(
+    (msg) =>
+      !(
+        (msg.sender === user1 && msg.receiver === user2) ||
+        (msg.sender === user2 && msg.receiver === user1)
+      )
+  );
+
+  saveMessages(messages);
+
+  res.status(200).json({ success: true, message: "Chat cleared successfully" });
+})
 
 //Real time chat
 io.on("connection", (socket) => {
