@@ -477,12 +477,12 @@ io.on("connection", (socket) => {
     console.log(`User ${userId} joined room`);
   });
 
-  socket.on("sendMessage", ({ from, to, text }) => {
+  socket.on("sendMessage", ({ senderId, recieverId, text }) => {
     const newMsg = {
       id: uuidv4(),
       text,
-      sender: from,
-      receiver: to,
+      sender: senderId,
+      receiver: recieverId,
       timestamp: new Date().toISOString(),
     };
 
@@ -490,7 +490,7 @@ io.on("connection", (socket) => {
     msgs.push(newMsg);
     saveMessages(msgs);
 
-    io.to(to).emit("receiveMessage", newMsg);
+    io.to(recieverId).emit("receiveMessage", newMsg);
   });
 
   socket.on("disconnect", () => {
